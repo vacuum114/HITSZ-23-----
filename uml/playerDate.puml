@@ -1,0 +1,39 @@
+@startuml
+class player
+{
+    -name:String
+    -score:int
+    -time:String
+    +player(String name,int score)
+    +player(String name,int score,String time)
+    +getName():String
+    +setName():void
+    +getScore():int
+    +setScore():void
+}
+interface playerDao
+{
+    +{abstract}findByName(String name):void
+    +{abstract}getAllplayer():List<player>
+    +{abstract}addPlayer(player p):void
+    +{abstract}deletePlayer(String name):void
+    +{abstract}lode():void
+    +{abstract}update():void
+}
+class playerDaoImpl
+{
+    #{static}playerList:List<player>
+    #{static}playerNum:int
+    +load():void
+    +update():void
+    +findByName(String name):void
+    +getAllplayer():List<player>
+    +addPlayer(player p):void
+    +deletePlayer((String name):void
+}
+class Game{}
+playerDaoImpl-->player
+playerDaoImpl..|>playerDao
+Game..>playerDao
+
+@enduml

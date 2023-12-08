@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class AbstractFlyingObject
+{
+ # locationX:int
+ # locationY:int
+ # speedX:int
+ # speedY:int
+ # image:BufferedImage
+ # width:int
+ # height:int
+ # isValid:boolean
+ + AbstractFlyingObject(int locationX, int locationY, int speedX, int speedY)
+ + forward():void
+ + crash(AbstractFlyingObject flyingObject):boolean
+ + setLocation(double locationX, double locationY):void
+ + getLocationX():int
+ + getLocationY():int
+ + getSpeedX():int
+ + getSpeedY():int
+ + getImage():BufferedImage
+ + getWidth():int
+ + getHeight():int
+ + notValid():boolean
+ + vanish():void
+}
+abstract class PropObject
+{
+  +PropObject(int locationX, int locationY, int speedX, int speedY)
+  +forward():void
+  +{abstract}Function(HeroAircraft hero):void
+}
+class PropBlood
+{
+    +PropBlood(int locationX, int locationY, int speedX, int speedY)
+    +Function(HeroAircraft hero):void
+}
+class PropBomb
+{
++PropBomb(int locationX, int locationY, int speedX, int speedY)
++Function(HeroAircraft hero):void
+}
+class PropBullet
+{
++PropBullet(int locationX, int locationY, int speedX, int speedY)
+    +Function(HeroAircraft hero):void
+}
+interface PropFactory
+{
+    +{abstract}  Creator(int x,int y):PropObject
+}
+class PropBloodFactory
+{
++Creator(int x,int y):PropObject
+}
+class PropBombFactory
+{
++Creator(int x,int y):PropObject
+}
+class PropBulletFactory
+{
++Creator(int x,int y):PropObject
+}
+AbstractFlyingObject<|--PropObject
+PropObject<|--PropBlood
+PropObject<|--PropBullet
+PropObject<|--PropBomb
+PropBloodFactory..|>PropFactory
+PropBulletFactory..|>PropFactory
+PropBombFactory..|>PropFactory
+PropBlood..>PropBloodFactory
+PropBomb..>PropBombFactory
+PropBullet..>PropBulletFactory
+
+@enduml

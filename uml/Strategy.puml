@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface ShootMethod{
+    +{abstract}shoot(int LocationX,int LoactionY,int speedX,int speedY,int power,int shootNum,int direction):List<BaseBullet>
+}
+class StraightShoot{
+    +shoot(int LocationX,int LoactionY,int speedX,int speedY,int power,int shootNum,int direction):List<BaseBullet>
+}
+class SpreadShoot{
+    +shoot(int LocationX,int LoactionY,int speedX,int speedY,int power,int shootNum,int direction):List<BaseBullet>
+}
+abstract class AbstractAircraft
+{
+ # maxHp:int
+ # hp:int
+ # power:int
+ # shootnum:int
+ # shootMethod:ShootMethod
+ + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+ + decreaseHp(int decrease):void
+ + getHp():int
+ + setShootMethod(ShootMethod shootMethod):void
+ + executeShoot(int LocationX,int LoactionY,int speedX,int speedY,int power,int shootNum,int direction):List<BaseBullet>
+ # {abstract} shoot():List<BaseBullet>
+}
+class Game{}
+ShootMethod<|..StraightShoot
+ShootMethod<|..SpreadShoot
+AbstractAircraft o-->ShootMethod
+Game..>AbstractAircraft
+@enduml

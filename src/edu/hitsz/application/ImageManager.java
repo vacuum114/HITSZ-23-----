@@ -1,10 +1,16 @@
 package edu.hitsz.application;
 
 
+import edu.hitsz.aircraft.EliteEnemy;
+import edu.hitsz.aircraft.BossEnemy;
 import edu.hitsz.aircraft.HeroAircraft;
 import edu.hitsz.aircraft.MobEnemy;
 import edu.hitsz.bullet.EnemyBullet;
 import edu.hitsz.bullet.HeroBullet;
+import edu.hitsz.prop.PropBlood;
+import edu.hitsz.prop.PropBomb;
+import edu.hitsz.prop.PropBullet;
+import edu.hitsz.frame.DifficultyFrame;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -32,21 +38,36 @@ public class ImageManager {
     public static BufferedImage HERO_BULLET_IMAGE;
     public static BufferedImage ENEMY_BULLET_IMAGE;
     public static BufferedImage MOB_ENEMY_IMAGE;
+    public static BufferedImage ELITE_ENEMY_IMAGE;
+    public static BufferedImage BOSS_ENEMY_IMAGE;
+    public static BufferedImage Blood_Prop_IMAGE;
+    public static BufferedImage Bomb_Prop_IMAGE;
+    public static BufferedImage Bullet_Prop_IMAGE;
+    public static BufferedImage Over_IMAGE;
 
     static {
         try {
 
-            BACKGROUND_IMAGE = ImageIO.read(new FileInputStream("src/images/bg.jpg"));
-
             HERO_IMAGE = ImageIO.read(new FileInputStream("src/images/hero.png"));
             MOB_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/mob.png"));
+            ELITE_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/elite.png"));
+            BOSS_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/boss.png"));
             HERO_BULLET_IMAGE = ImageIO.read(new FileInputStream("src/images/bullet_hero.png"));
             ENEMY_BULLET_IMAGE = ImageIO.read(new FileInputStream("src/images/bullet_enemy.png"));
+            Blood_Prop_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_blood.png"));
+            Bomb_Prop_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_bomb.png"));
+            Bullet_Prop_IMAGE = ImageIO.read(new FileInputStream("src/images/prop_bullet.png"));
+            Over_IMAGE=ImageIO.read(new FileInputStream("src/images/game_over.png"));
 
             CLASSNAME_IMAGE_MAP.put(HeroAircraft.class.getName(), HERO_IMAGE);
             CLASSNAME_IMAGE_MAP.put(MobEnemy.class.getName(), MOB_ENEMY_IMAGE);
+            CLASSNAME_IMAGE_MAP.put(EliteEnemy.class.getName(),ELITE_ENEMY_IMAGE);
+            CLASSNAME_IMAGE_MAP.put(BossEnemy.class.getName(),BOSS_ENEMY_IMAGE);
             CLASSNAME_IMAGE_MAP.put(HeroBullet.class.getName(), HERO_BULLET_IMAGE);
             CLASSNAME_IMAGE_MAP.put(EnemyBullet.class.getName(), ENEMY_BULLET_IMAGE);
+            CLASSNAME_IMAGE_MAP.put(PropBlood.class.getName(),Blood_Prop_IMAGE);
+            CLASSNAME_IMAGE_MAP.put(PropBomb.class.getName(),Bomb_Prop_IMAGE);
+            CLASSNAME_IMAGE_MAP.put(PropBullet.class.getName(),Bullet_Prop_IMAGE);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,6 +84,22 @@ public class ImageManager {
             return null;
         }
         return get(obj.getClass().getName());
+    }
+    public static void setBackGround()
+    {
+        int k= DifficultyFrame.difficultySelection;
+        try {
+            if (k == 0) {
+                BACKGROUND_IMAGE = ImageIO.read(new FileInputStream("src/images/bg.jpg"));
+            } else if (k == 1) {
+                BACKGROUND_IMAGE = ImageIO.read(new FileInputStream("src/images/bg2.jpg"));
+            } else if (k == 2) {
+                BACKGROUND_IMAGE = ImageIO.read(new FileInputStream("src/images/bg4.jpg"));
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
     }
 
 }

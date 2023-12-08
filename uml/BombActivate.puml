@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/class-diagram
+interface bombActivate
+{
++{abstract}update():void
+}
+class BossEnemy
+{
++update():void
+}
+class EliteEnemy
+{
++update():void
+}
+class MobEnemy
+{
++update():void
+}
+class EnemyBullet
+{
++update():void
+}
+class bombList
+{
+-list:List<bombActivate>
++add(bombActivate b):void
++remove(bombActivate b):void
++activate():void
+}
+class Game
+{
+#bomblist:bombList
+}
+bombActivate<|..BossEnemy
+bombActivate<|..EliteEnemy
+bombActivate<|..MobEnemy
+bombActivate<|..EnemyBullet
+bombList o-->bombActivate
+Game..>bombList
+@enduml

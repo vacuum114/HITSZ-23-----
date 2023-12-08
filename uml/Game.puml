@@ -1,0 +1,137 @@
+@startuml
+skinparam dpi =400
+scale 1000 width
+scale 800 height
+abstract class AbstractFlyingObject
+{
+    # locationX:int
+     # locationY:int
+     # speedX:int
+     # speedY:int
+     # image:BufferedImage
+     # width:int
+     # height:int
+     # isValid:boolean
+     + AbstractFlyingObject(int locationX, int locationY, int speedX, int speedY)
+     + forward():void
+     + crash(AbstractFlyingObject flyingObject):boolean
+     + setLocation(double locationX, double locationY):void
+     + getLocationX():int
+     + getLocationY():int
+     + getSpeedX():int
+     + getSpeedY():int
+     + getImage():BufferedImage
+     + getWidth():int
+     + getHeight():int
+     + notValid():boolean
+     + vanish():void
+}
+abstract class AbstrcatAircraft
+{
+    # maxHp:int
+     # hp:int
+     # shootnum:int
+     # power:int
+     -shootMethod:ShootMethod
+     + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp,shootnum,power)
+     + decreaseHp(int decrease):void
+     + getHp():int
+     + getShootnum():int
+     + setShootnum(int x):void
+     + getPower():int
+     + {abstract} shoot():List<BaseBullet>
+     + setShootMethod(ShootMethod shootMethod):void
+     + executeShoot():List<BaseBullet>
+}
+abstract class PropObject
+{
+   +PropObject(int locationX, int locationY, int speedX, int speedY)
+     +forward():void
+     +{abstract}Function(HeroAircraft hero):void
+}
+abstract class BaseBullet
+{
+    public BaseBullet(int locationX, int locationY, int speedX, int speedY, int power)
+    public void forward()
+    public int getPower()
+}
+class HeroAircraft
+{
+    - direction:int
+     -{static}instance:HeroAircraft
+     - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+     + forward():void
+     +increaseHp(int increase):void
+     + shoot():List<BaseBullet>
+     +{static}GetInstance():HeroAircraft
+     +initial():void
+     +increaseBullet():void
+     +decreaseBullet():void
+}
+abstract class AbstractEnemy
+{
++ Enemy(int locationX, int locationY, int speedX, int speedY, int hp)
++ {abstract} dropProp():PropObject
+# outOfBound:boolean
++ isOutOfBound():boolean
+}
+class MobEnemy
+{
+   + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum,int power)
+       + forward():void
+       + dropProp():PropObject
+       + shoot():List<BaseBullet>
+}
+class EliteEnemy
+{
+    - direction:int
+     + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum,int power)
+     + forward():void
+     + dropProp():PropObject
+     + shoot():List<BaseBullet>
+}
+class BossEnemy
+{
+   - direction:int
+    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum,int power)
+    + dropProp():PropObject
+    + forward():void
+    + shoot():List<BaseBullet>
+}
+class HeroBullet
+{
+    +HeroBullet(int locationX, int locationY, int speedX, int speedY, int power):List<BaseBullet>
+}
+class EnemyBullet
+{
+    +EnemyBullet(int locationX, int locationY, int speedX, int speedY, int power):List<BaseBullet>
+}
+class PropBlood
+{
+    +PropBlood(int locationX, int locationY, int speedX, int speedY)
+    +Function():void
+}
+class PropBomb
+{
+    +PropBomb(int locationX, int locationY, int speedX, int speedY)
+    +Function():void
+}
+class PropBullet
+{
+    +PropBullet(int locationX, int locationY, int speedX, int speedY)
+    +Function():void
+}
+AbstractFlyingObject<|--AbstrcatAircraft
+AbstractFlyingObject<|--PropObject
+AbstractFlyingObject<|--BaseBullet
+AbstrcatAircraft<|--HeroAircraft
+AbstrcatAircraft<|--AbstractEnemy
+AbstractEnemy<|--MobEnemy
+AbstractEnemy<|--EliteEnemy
+AbstractEnemy<|--BossEnemy
+PropObject<|--PropBlood
+PropObject<|--PropBomb
+PropObject<|--PropBullet
+BaseBullet<|--HeroBullet
+BaseBullet<|--EnemyBullet
+@enduml
